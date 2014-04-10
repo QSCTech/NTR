@@ -4,7 +4,8 @@ using namespace std;
 
 Platform::Platform() {
 	//TODO: 初始化各个玩家
-
+	initLevels();
+	initCards();
 
 }
 
@@ -38,4 +39,11 @@ void Platform::initCards() {
 	for (int i = 1; i <= MAX_CARD; ++i) 
 		cards.push_back(i);
 	random_shuffle(cards.begin(), cards.end());
+	printVector(cards);
+}
+
+void Platform::printVector(vector<int> vec) {
+	for (auto ai = vec.begin(); ai != vec.end(); ++ai) 
+		cout << *ai << ' ';
+	cout << endl;
 }

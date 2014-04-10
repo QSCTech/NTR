@@ -11,6 +11,7 @@ using namespace std;
 class Player{
 public:
 	// 构造函数，map 是一个104 大小的映射，存储牌点数-牛头数的映射关系，需要自行保存.
+	// vector<int> 保证有序（从小到大）
 	Player(map<int, int>);
 
 	// 你的玩家名称

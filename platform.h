@@ -9,7 +9,7 @@
 #include <algorithm>
 using namespace std;
 
-#define MAX_CARD = 104;
+#define MAX_CARD 104
 
 class Platform {
 private:
@@ -24,7 +24,7 @@ public:
 	void initLevels();
 	void initCards();
 
-	void printVector();
+	void printVector(vector<int>);
 	
 
 
