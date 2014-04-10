@@ -45,7 +45,6 @@ void Platform::initCards() {
 	int avaliableCount = MAX_CARD - 4;
 	extraCards.resize(avaliableCount % player_count);
 	copy(iter, iter + avaliableCount % player_count, extraCards.begin());
-	printVector(extraCards);
 	iter += avaliableCount % player_count;
 
 	//TODO 伪造数据
@@ -60,7 +59,6 @@ void Platform::initCards() {
 		heapCards.push_back(*iter);
 		++iter;
 	}
-	printVector(heapCards);
 }
 
 void Platform::printVector(vector<int> vec) {
