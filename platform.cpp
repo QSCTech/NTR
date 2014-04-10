@@ -42,18 +42,25 @@ void Platform::initCards() {
 
 	auto iter = cards.begin();
 
-	extraCards.resize(MAX_CARD % player_count);
-	copy(iter, iter + MAX_CARD % player_count, extraCards.begin());
+	int avaliableCount = MAX_CARD - 4;
+	extraCards.resize(avaliableCount % player_count);
+	copy(iter, iter + avaliableCount % player_count, extraCards.begin());
 	printVector(extraCards);
-	iter += MAX_CARD % player_count;
+	iter += avaliableCount % player_count;
 
 	//TODO 伪造数据
 	for (int i = 0; i != player_count; ++i) {
-		vector<int> tempCards(MAX_CARD / player_count);
-		copy(iter, iter + MAX_CARD / player_count, tempCards.begin());
+		vector<int> tempCards(avaliableCount / player_count);
+		copy(iter, iter + avaliableCount / player_count, tempCards.begin());
 		userCards.insert(pair <string, vector<int>> ("name" + i, tempCards));
-		iter = iter + MAX_CARD / player_count;
+		iter = iter + avaliableCount / player_count;
 	}
+
+	while (iter != cards.end()) {
+		heapCards.push_back(*iter);
+		++iter;
+	}
+	printVector(heapCards);
 }
 
 void Platform::printVector(vector<int> vec) {
