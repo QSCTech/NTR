@@ -32,6 +32,7 @@ public:
 	void printVector(vector<int>);
 	void init();
 	int getRoundTime(); // 获取即将进行几轮比赛
+	void notifyFinish(); // 通知他游戏结束了
 };
 
 #endif

@@ -15,7 +15,6 @@ Platform::Platform() {
 		scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
 	}
 
-	vector<string> names;
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);
 	}
@@ -25,7 +24,7 @@ Platform::Platform() {
 }
 
 int Platform::getRoundTime() {
-	return (MAX_CARD - extraCards.size()) % players.size();
+	return (MAX_CARD - extraCards.size() - 4) / players.size();
 }
 
 void Platform::initLevels() {
@@ -63,25 +62,31 @@ void Platform::initCards() {
 
 	int avaliableCount = MAX_CARD - 4;
 	extraCards.resize(avaliableCount % player_count);
-	copy(iter, iter + avaliableCount % player_count, extraCards.begin());
+	copy(iter, iter + (avaliableCount % player_count), extraCards.begin());
 	sort(extraCards.begin(), extraCards.end());
 	iter += avaliableCount % player_count;
 
-	//TODO 伪造数据
+	cout << names.size() << endl;
+
 	for (int i = 0; i != player_count; ++i) {
 		vector<int> tempCards(avaliableCount / player_count);
 		copy(iter, iter + avaliableCount / player_count, tempCards.begin());
 		sort(tempCards.begin(), tempCards.end());
-		userCards.insert(pair <string, vector<int>> ("name" + i, tempCards));
+		printVector(tempCards);
+		userCards.insert(pair <string, vector<int>> (names[i], tempCards));
 		iter = iter + avaliableCount / player_count;
+		cout<<iter - cards.begin() << endl;
 	}
 
+	cout<< endl << cards.end() - iter <<endl;
 	while (iter != cards.end()) {
 		vector<int> heap;
 		heap.push_back(*iter);
 		heapCards.push_back(heap);
 		++iter;
+		printVector(heap);
 	}
+	
 }
 
 void Platform::printVector(vector<int> vec) {
@@ -100,7 +105,7 @@ void Platform::singleRound() {
 		vector<int> tempUserCard = userCards[iter->first];
 		// 判断是否存在这张牌
 		if (find(tempUserCard.begin(), tempUserCard.end(), retCard) == tempUserCard.end()) {
-			cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
+			// cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
 			exit(1);
 		}
 		operation.insert(pair <int, string> (retCard, iter->first));
@@ -128,7 +133,7 @@ void Platform::singleRound() {
 			//没有找到，需要询问他删除那个牌堆了
 			int heapToGet = player->getHeap(heapCards, operationReversed);
 			if (heapToGet < 0 || heapToGet > 3) {
-				cerr << "User: " + iter->first << " returns error AT getHeap: " << heapToGet <<endl;
+				// cerr << "User: " + iter->first << " returns error AT getHeap: " << heapToGet <<endl;
 				exit(1);
 			}
 
@@ -154,8 +159,6 @@ void Platform::singleRound() {
 				// 没发生什么事情
 			}
 		}
-
-		cerr << "Max heap found : " + cardMax << endl;
 	}
 }
 
@@ -163,4 +166,16 @@ void Platform::init() {
 	for (auto iter = names.begin(); iter != names.end(); ++iter) {
 		players[*iter]->init(names, userCards[*iter], extraCards);
 	}
+}
+
+void Platform::notifyFinish() {
+	cout << endl << endl << "User Score List:" << endl;
+	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
+		int sum = 0;
+		for (auto io = iter->second.begin(); io != iter->second.end(); ++io) {
+			sum += *io;
+		}
+		cout << iter->first << '\t' << sum << endl;
+	}
+	cout << endl;
 }
