@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "naive.h"
-#include "trevor.h"
+#include "april.h"
 using namespace std;
 
 Platform::Platform() {
@@ -15,7 +15,7 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
-	p = new Trevor(level);
+	p = new April(level);
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
@@ -109,7 +109,7 @@ void Platform::singleRound() {
 		vector<int> tempUserCard = userCards[iter->first];
 		// 判断是否存在这张牌
 		if (find(tempUserCard.begin(), tempUserCard.end(), retCard) == tempUserCard.end()) {
-			// cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
+			cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
 			exit(1);
 		}
 		operation.insert(pair <int, string> (retCard, iter->first));
@@ -137,7 +137,7 @@ void Platform::singleRound() {
 			//没有找到，需要询问他删除那个牌堆了
 			int heapToGet = player->getHeap(heapCards, operationReversed);
 			if (heapToGet < 0 || heapToGet > 3) {
-				// cerr << "User: " + iter->first << " returns error AT getHeap: " << heapToGet <<endl;
+				cerr << "User: " + iter->first << " returns error AT getHeap: " << heapToGet <<endl;
 				exit(1);
 			}
 
@@ -163,6 +163,11 @@ void Platform::singleRound() {
 				// 没发生什么事情
 			}
 		}
+	}
+
+	for (auto iter = operation.begin(); iter != operation.end(); ++iter) {
+		Player *player = players[iter->second];
+		player->notifyPostRun(operationReversed);
 	}
 }
 
