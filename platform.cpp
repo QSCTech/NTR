@@ -11,12 +11,14 @@ Platform::Platform() {
 
 	vector<int> t;
 	Player *p = new Naive(level);
-	players.insert(pair <string, Player*> (p->yourName(), p));
-	scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
+	string name = p->yourName();
+	players.insert(pair <string, Player*> (name, p));
+	scoreCards.insert(pair <string, vector<int>> (name, t));
 
 	p = new Trevor(level);
-	players.insert(pair <string, Player*> (p->yourName(), p));
-	scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
+	name = p->yourName();
+	players.insert(pair <string, Player*> (name, p));
+	scoreCards.insert(pair <string, vector<int>> (name, t));
 
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
@@ -59,6 +61,7 @@ void Platform::initLevels() {
 }
 
 void Platform::initCards() {
+	cout << "Initialing Cards\n";
 	for (int i = 1; i <= MAX_CARD; ++i) 
 		cards.push_back(i);
 	random_shuffle(cards.begin(), cards.end());
@@ -85,6 +88,7 @@ void Platform::initCards() {
 		heapCards.push_back(heap);
 		++iter;
 	}
+	cout << "Initial Card complete\n";
 	
 }
 
@@ -99,6 +103,7 @@ void Platform::singleRound() {
 	map<string, int> operationReversed;
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
+		cout << "\tUser " << iter->first << " Start." << endl;
 		int retCard = iter->second->run(heapCards, scoreCards);
 
 		vector<int> tempUserCard = userCards[iter->first];

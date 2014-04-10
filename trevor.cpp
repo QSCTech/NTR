@@ -4,7 +4,6 @@
 
 Trevor::Trevor(map<int, int> card_define) {
 	cardDefine = card_define;
-	srand(time(0));
 }
 
 string Trevor::yourName() {

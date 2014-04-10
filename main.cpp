@@ -11,7 +11,8 @@ int main() {
 	srand(seed);
 	Platform p;
 	int count = p.getRoundTime();
-	while (--count) {
+	for (int i = 0; i != count; ++i) {
+		cout << "Round " << i << " Start\n";
 		p.singleRound();
 	}
 	p.notifyFinish();
