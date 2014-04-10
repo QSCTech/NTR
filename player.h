@@ -11,7 +11,7 @@ using namespace std;
 class Player{
 public:
 	// 构造函数，map 是一个104 大小的映射，存储牌点数-牛头数的映射关系，需要自行保存.
-	Player(map<int, int>);
+	virtual Player(map<int, int>) = 0;
 
 	// 你的玩家名称
 	virtual string yourName() = 0;
@@ -23,7 +23,7 @@ public:
 	virtual int run(vector<int>, map<string, vector<int>>) = 0;
 
 	// 选择你要拿走的一堆牌，其它每个用户出了什么牌，返回index。（你会在这次调用后被调用 notifyGetScore 通知你获得了这些分数，因此你无需在这个函数调用中记录分数）
-	virtual int getHeap(vector<int>, map<string, int>);
+	virtual int getHeap(vector<int>, map<string, int>) = 0;
 
 	// 告诉你这一局你得到了这些牌，如果你没有拿到牌，则不会被调用
 	virtual void notifyGetScore(vector<int>) = 0;
