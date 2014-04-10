@@ -32,6 +32,7 @@ int Platform::getRoundTime() {
 }
 
 void Platform::initLevels() {
+	
 	// http://zh.wikipedia.org/wiki/%E8%B0%81%E6%98%AF%E7%89%9B%E5%A4%B4%E7%8E%8B
 	for (int i = 1; i <= MAX_CARD; ++i) {
 		if ( (i - 5) % 5 == 0) {
@@ -70,25 +71,19 @@ void Platform::initCards() {
 	sort(extraCards.begin(), extraCards.end());
 	iter += avaliableCount % player_count;
 
-	cout << names.size() << endl;
-
 	for (int i = 0; i != player_count; ++i) {
 		vector<int> tempCards(avaliableCount / player_count);
 		copy(iter, iter + avaliableCount / player_count, tempCards.begin());
 		sort(tempCards.begin(), tempCards.end());
-		printVector(tempCards);
 		userCards.insert(pair <string, vector<int>> (names[i], tempCards));
 		iter = iter + avaliableCount / player_count;
-		cout<<iter - cards.begin() << endl;
 	}
 
-	cout<< endl << cards.end() - iter <<endl;
 	while (iter != cards.end()) {
 		vector<int> heap;
 		heap.push_back(*iter);
 		heapCards.push_back(heap);
 		++iter;
-		printVector(heap);
 	}
 	
 }
@@ -177,7 +172,7 @@ void Platform::notifyFinish() {
 	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
 		int sum = 0;
 		for (auto io = iter->second.begin(); io != iter->second.end(); ++io) {
-			sum += *io;
+			sum += level[*io];
 		}
 		cout << iter->first << '\t' << sum << endl;
 	}
