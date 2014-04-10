@@ -17,21 +17,28 @@ void Naive::init(vector<string> player, vector<int> my_card, vector<int> unused_
 	playerName = player;
 	myCard = my_card;
 	unusedCard = unused_card;
-	for (size_t i = 0; i != player.size(); i++) {
-		if (player[i] == myName) {
-			myPosition = i;
-			break;
-		}
+	cerr << "Unused cards in this game are: ";
+	for (auto i = unusedCard.begin(); i != unusedCard.end(); i++) {
+		cerr << *i << " ";
 	}
+	cerr << endl;
+	cerr << "Players in this game are: ";
+	for (auto i = playerName.begin(); i != playerName.end(); i++) {
+		if (*i == myName) {
+			myPosition = i - playerName.begin();
+		}
+		cerr << *i << " ";
+	}
+	cerr << endl << endl;
 }
 
 int Naive::run(vector<vector<int> > heap, map<string, vector<int> > score) {
 	round++;
-	cerr << "Round " << round << " starts!" << endl;
 	int index = rand();
 	index = index % myCard.size();
 	int ret = myCard[index];
 	myCard.erase(myCard.begin() + index);
+	cerr << "[Round " << round << "] Naive gave out " << ret << "." << endl;
 	return ret;
 }
 
@@ -47,12 +54,12 @@ int Naive::getHeap(vector<vector<int> > heap, map<string, int> play) {
 			ret = i;
 		}
 	}
-	cerr << "I decided to take Heap " << ret << "." << endl;
+	cerr << "Naive decided to take Heap " << ret << "." << endl;
 	return ret;
 }
 
 void Naive::notifyGetScore(vector<int> score) {
-	cerr << "In Round " << round << " I got " << score[myPosition] << " penalty." << endl;
+	cerr << "[Round " << round << "] Naive got " << score[myPosition] << " penalty." << endl;
 	myScore += score[myPosition];
 }
 
