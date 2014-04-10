@@ -11,6 +11,7 @@ using namespace std;
 class Naive: public Player {
 	public:
 		Naive(map<int, int>);
+		Naive(map<int, int>, string);
 		string yourName();
 		void init(vector<string>, vector<int>, vector<int>);
 		int run(vector<vector<int> >, map<string, vector<int> >);
@@ -24,7 +25,7 @@ class Naive: public Player {
 		vector<int> myCard;		// cards currently in my hand
 		vector<int> unusedCard;		// unsed cards in this game
 		map<int, int> cardDefine;	// card number -- NTR
-		const string myName = "Naive";
+		string myName;
 };
 
 #endif

@@ -6,6 +6,14 @@ Naive::Naive(map<int, int> card_define) {
 	round = 0;
 	myScore = 0;
 	cardDefine = card_define;
+	myName = "naive";
+}
+
+Naive::Naive(map<int, int> card_define, string name) {
+	round = 0;
+	myScore = 0;
+	cardDefine = card_define;
+	myName = name;
 }
 
 string Naive::yourName() {
