@@ -11,8 +11,12 @@ Platform::Platform() {
 	for (int i = 0; i != player_count; ++i) {
 		vector<int> t;
 		Player *p = new Naive(level);
-		players.insert(pair <string, Player*> (p->yourName(), p));
-		scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
+		string name = p->yourName();
+		if (i == 1) name = "hexcles";
+		if (i == 2) name = "richard";
+		if (i == 3) name = "4th";
+		players.insert(pair <string, Player*> (name, p));
+		scoreCards.insert(pair <string, vector<int>> (name, t));
 	}
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
@@ -28,6 +32,7 @@ int Platform::getRoundTime() {
 }
 
 void Platform::initLevels() {
+	
 	// http://zh.wikipedia.org/wiki/%E8%B0%81%E6%98%AF%E7%89%9B%E5%A4%B4%E7%8E%8B
 	for (int i = 1; i <= MAX_CARD; ++i) {
 		if ( (i - 5) % 5 == 0) {
@@ -66,25 +71,19 @@ void Platform::initCards() {
 	sort(extraCards.begin(), extraCards.end());
 	iter += avaliableCount % player_count;
 
-	cout << names.size() << endl;
-
 	for (int i = 0; i != player_count; ++i) {
 		vector<int> tempCards(avaliableCount / player_count);
 		copy(iter, iter + avaliableCount / player_count, tempCards.begin());
 		sort(tempCards.begin(), tempCards.end());
-		printVector(tempCards);
 		userCards.insert(pair <string, vector<int>> (names[i], tempCards));
 		iter = iter + avaliableCount / player_count;
-		cout<<iter - cards.begin() << endl;
 	}
 
-	cout<< endl << cards.end() - iter <<endl;
 	while (iter != cards.end()) {
 		vector<int> heap;
 		heap.push_back(*iter);
 		heapCards.push_back(heap);
 		++iter;
-		printVector(heap);
 	}
 	
 }
@@ -173,7 +172,7 @@ void Platform::notifyFinish() {
 	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
 		int sum = 0;
 		for (auto io = iter->second.begin(); io != iter->second.end(); ++io) {
-			sum += *io;
+			sum += level[*io];
 		}
 		cout << iter->first << '\t' << sum << endl;
 	}

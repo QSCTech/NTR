@@ -14,7 +14,7 @@ using namespace std;
 class Platform {
 private:
 	map<int, int> level;
-	const int player_count = 1;
+	const int player_count = 4;
 	map<string, Player*> players;
 	vector<string> names;
 	vector<int> cards; //所有的卡片
