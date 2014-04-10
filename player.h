@@ -28,6 +28,9 @@ public:
 
 	// 告诉你这一局你得到了这些牌，如果你没有拿到牌，则不会被调用
 	virtual void notifyGetScore(vector<int>) = 0;
+
+	// 告知上一局运行完成后的各种信息, 上一论每个人出了什么，不强制实现。 保证在所有的询问函数（如getHeap，notifyGetScore）之后调用
+	virtual void notifyPostRun(map<string, int>) {};
 };
 
 #endif

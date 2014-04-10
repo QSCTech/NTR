@@ -164,6 +164,11 @@ void Platform::singleRound() {
 			}
 		}
 	}
+
+	for (auto iter = operation.begin(); iter != operation.end(); ++iter) {
+		Player *player = players[iter->second];
+		player->notifyPostRun(operation);
+	}
 }
 
 void Platform::init() {
