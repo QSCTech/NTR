@@ -17,9 +17,14 @@ class Naive: public Player {
 		int getHeap(vector<vector<int> >, map<string, int>);
 		void notifyGetScore(vector<int>);
 	private:
-		vector<string> playerName;
-		vector<int> myCard, leftCard;
-		map<int, int> cardDefine;
+		int round;			// current round
+		int myScore;			// my current score
+		int myPosition;			// my position(index) in the player vector
+		vector<string> playerName;	// the names of all players (useless?)
+		vector<int> myCard;		// cards currently in my hand
+		vector<int> unusedCard;		// unsed cards in this game
+		map<int, int> cardDefine;	// card number -- NTR
+		const string myName = "Naive";
 };
 
 #endif
