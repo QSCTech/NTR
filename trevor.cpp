@@ -1,6 +1,7 @@
 #include "trevor.h"
 #include <ctime>
 #include <climits>
+#include <iostream>
 
 Trevor::Trevor(map<int, int> card_define) {
 	cardDefine = card_define;
@@ -30,9 +31,16 @@ int Trevor::run(vector<vector<int> > heap, map<string, vector<int> > score) {
 			cardFlag[score[playerName[i]][j]] = 0;
 		}
 	}
+	// cout << "cardFlag init" << endl;
 	int index = getTactics(heap);
 	int ret = myCard[index];
-	myCard.erase(myCard.begin() + index);
+	// cout << "getTactics" << endl;
+	for(vector<int>::iterator it=myCard.begin();it!=myCard.end();++it) {
+		if(*it == index) {
+			it=myCard.erase(it);
+		}
+	}
+	// cout << "end run" << endl;
 	return ret;
 }
 
@@ -77,7 +85,6 @@ int Trevor::getTactics(vector<vector<int> > heap){
 			distenceVec.push_back(distence);
 		}
 	}
-	// quickSort(distenceVec, 0, distenceVec.size());
 	int minScore = getMinScore(heap);
 	if (minDistence < 0) {
 		if (minScore < 5) return myCard[0];
@@ -115,24 +122,4 @@ int Trevor::getDistence(vector<int> heap, int cardNum) {
 		if (cardFlag[i]) distence++;
 	};
 	return distence;
-}
-
-int Trevor::partition(vector<int> &vi, int low, int up) {
-	int pivot = vi[up];
-	int i = low-1;
-	for (int j = low; j < up; j++) {
-		if(vi[j] <= pivot) {
-			i++;
-			swap(vi[i], vi[j]);
-		}
-	}
-	swap(vi[i+1], vi[up]);
-	return i+1;
-}
-void Trevor::quickSort(vector<int> &vi, int low, int up) {
-	if(low < up) {
-		int mid = partition(vi, low, up);
-		quickSort(vi, low, mid-1);
-		quickSort(vi, mid+1, up); 
-	}
 }
