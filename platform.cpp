@@ -2,18 +2,22 @@
 #include <iostream>
 
 #include "naive.h"
+#include "trevor.h"
 using namespace std;
 
 Platform::Platform() {
 	//TODO: 初始化各个玩家
 	initLevels();
 
-	for (int i = 0; i != player_count; ++i) {
-		vector<int> t;
-		Player *p = new Naive(level);
-		players.insert(pair <string, Player*> (p->yourName(), p));
-		scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
-	}
+	vector<int> t;
+	Player *p = new Naive(level);
+	players.insert(pair <string, Player*> (p->yourName(), p));
+	scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
+
+	p = new Trevor(level);
+	players.insert(pair <string, Player*> (p->yourName(), p));
+	scoreCards.insert(pair <string, vector<int>> (p->yourName(), t));
+
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);
