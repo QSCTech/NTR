@@ -26,8 +26,9 @@ void Platform::initLevels() {
 			level.insert(pair <int, int>(i, 7));
 			continue;
 		}
+		level.insert(pair <int, int>(i, 1));
 	}
-	for (auto iter = level.begin(); iter != level.end(); ++iter) {
-		cout << iter->first << ' ' << iter->second<<endl;
-	}
+	// for (auto iter = level.begin(); iter != level.end(); ++iter) {
+	// 	cout << iter->first << ' ' << iter->second<<endl;
+	// }
 }
