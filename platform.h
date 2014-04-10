@@ -14,9 +14,11 @@ using namespace std;
 class Platform {
 private:
 	map<int, int> level;
-	const int player_count = 1;
+	const int player_count = 3;
 	// map<string, Player*> players;
 	vector<int> cards; //所有的卡片
+	map<string, vector<int>> userCards; //每个用户的所有卡片（根据出牌情况更新，会检查牌数、有没有等）
+	vector<int> extraCards; //多余的牌
 
 public:
 	Platform();

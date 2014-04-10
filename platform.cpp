@@ -39,7 +39,21 @@ void Platform::initCards() {
 	for (int i = 1; i <= MAX_CARD; ++i) 
 		cards.push_back(i);
 	random_shuffle(cards.begin(), cards.end());
-	printVector(cards);
+
+	auto iter = cards.begin();
+
+	extraCards.resize(MAX_CARD % player_count);
+	copy(iter, iter + MAX_CARD % player_count, extraCards.begin());
+	printVector(extraCards);
+	iter += MAX_CARD % player_count;
+
+	//TODO 伪造数据
+	for (int i = 0; i != player_count; ++i) {
+		vector<int> tempCards(MAX_CARD / player_count);
+		copy(iter, iter + MAX_CARD / player_count, tempCards.begin());
+		userCards.insert(pair <string, vector<int>> ("name" + i, tempCards));
+		iter = iter + MAX_CARD / player_count;
+	}
 }
 
 void Platform::printVector(vector<int> vec) {
