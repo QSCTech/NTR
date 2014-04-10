@@ -106,12 +106,21 @@ void Platform::singleRound() {
 		cout << "\tUser " << iter->first << " Start." << endl;
 		int retCard = iter->second->run(heapCards, scoreCards);
 
-		vector<int> tempUserCard = userCards[iter->first];
+
+
+		vector<int> &tempUserCard = userCards[iter->first];
 		// 判断是否存在这张牌
 		if (find(tempUserCard.begin(), tempUserCard.end(), retCard) == tempUserCard.end()) {
 			cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
+			cout << "Heap top dumped:" << endl;
+			for (auto heapIter = heapCards.begin(); heapIter != heapCards.end(); ++heapIter) {
+				printVector(*heapIter);
+			}
 			exit(1);
 		}
+		tempUserCard.erase(find(tempUserCard.begin(), tempUserCard.end(), retCard));
+
+
 		operation.insert(pair <int, string> (retCard, iter->first));
 		operationReversed.insert(pair <string, int> (iter->first, retCard));
 		// 将出牌序列保存起来
