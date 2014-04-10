@@ -25,8 +25,6 @@ class Trevor: public Player {
 		int getIndex(vector<int> a, int value);
 		int getMinScore(vector<vector<int> > heap);
 		int getDistence(vector<int> heap, int cardNum);
-		int partition(vector<int> &vi, int low, int up);
-		void quickSort(vector<int> &vi, int low, int up);
 };
 
 #endif
