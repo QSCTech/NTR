@@ -39,7 +39,7 @@ int NTRAI_Leo::run(vector<vector<int> > heaps, map<string, vector<int> > score)
     auto chosenCard = myCard.begin();
     for (auto card = myCard.begin(); card != myCard.end();card++) {
         int cardNum = *card; cerr<<cardNum<<"****"<<endl;
-        int fee = (104 - cardNum) / 2;
+        int fee = (104 - cardNum) / 3 + rand() % 104;
         auto changedHeap = heaps.begin();
         int changedHeapLargestNumber = INT_MAX;
         for (auto heap = heaps.begin(); heap != heaps.end(); heap++) {
