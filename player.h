@@ -1,5 +1,5 @@
-#ifndef MAIN_H_
-#define MAIN_H_
+#ifndef PLAYER_H_
+#define PLAYER_H_
 
 #include <vector>
 #include <set>
@@ -8,28 +8,48 @@
 #include <algorithm>
 using namespace std;
 
-class Player{
+// 所有纯虚函数必须在子类中实现！
+class Player {
 public:
-	// 构造函数，map 是一个104 大小的映射，存储牌点数-牛头数的映射关系，需要自行保存.
-	// vector<int> 保证有序（从小到大）
-	// Player(map<int, int>); 请实现一个这样的构造函数，父类会自动被构造
+	// 构造函数
+	// 参数：
+	// 	* 牌点数（1~104）--牛头数的映射关系，请自行保存（之后所有卡牌都以点数指定）
+	// TODO 请实现一个这样的构造函数（无需关心父类，将会被自动构造）
+	// YourClass(map<int, int>); 
 
-	// 你的玩家名称
+	// 返回你的玩家名称（仅会在游戏开始前被调用一次）
 	virtual string yourName() = 0;
 
-	// 初始化，传入所有玩家姓名，你的本局牌，剩余的牌（即104 / 玩家数后多余的牌）
+	// 游戏初始化
+	// 参数：
+	// 	* 所有玩家姓名
+	// 	* 你所获得的手牌
+	// 	* 本场游戏未被使用的牌 == (104 - 4) % NumberOfPlayers
 	virtual void init(vector<string>, vector<int>, vector<int>) = 0;
 
-	// 进行一轮游戏，传入当前下面4个牌堆的牌，每个用户手中的记分牌（用于算牌）
+	// 一轮游戏开始，询问出牌
+	// 参数：
+	// 	* 当前4个牌堆中的所有牌（每堆中按从小到大排列）
+	// 	* 每个玩家已获得的记分牌
 	virtual int run(vector<vector<int>>, map<string, vector<int>>) = 0;
 
-	// 选择你要拿走的一堆牌，其它每个用户出了什么牌，返回index。（你会在这次调用后被调用 notifyGetScore 通知你获得了这些分数，因此你无需在这个函数调用中记录分数）
+	// 翻牌之后，出现需选走一堆牌的情况，询问选择（返回牌堆号，从0开始）
+	// 参数：
+	// 	* 其它每个用户出了什么
+	// （你会在这次调用后被调用 notifyGetScore 通知你获得了这些牌，
+	// 因此你无需在这个函数调用中记录分数）
 	virtual int getHeap(vector<vector<int>>, map<string, int>) = 0;
 
-	// 告诉你这一局你得到了这些牌，如果你没有拿到牌，则不会被调用
+	// 一轮结束，通知获得的卡牌
+	// 参数：
+	// 	* 获得的卡牌
+	// （如果你没有拿到牌，则不会被调用）
 	virtual void notifyGetScore(vector<int>) = 0;
 
-	// 告知上一局运行完成后的各种信息, 上一论每个人出了什么，不强制实现。 保证在所有的询问函数（如getHeap，notifyGetScore）之后调用
+	// 一轮结束，通知上一轮各玩家的出牌（每个玩家获得的罚分可在下一轮的 run 中获得）
+	// 参数：
+	// 	* 每个玩家在上一轮所出的牌
+	// （不强制实现，保证在所有的询问函数之后调用）
 	virtual void notifyPostRun(map<string, int>) {};
 };
 
