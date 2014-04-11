@@ -14,7 +14,11 @@ using namespace std;
 class Platform {
 private:
 	map<int, int> level;
+<<<<<<< HEAD
 	const int player_count = 2;
+=======
+	const int player_count = 4;
+>>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
 	map<string, Player*> players;
 	vector<string> names;
 	vector<int> cards; //所有的卡片
@@ -33,6 +37,7 @@ public:
 	void init();
 	int getRoundTime(); // 获取即将进行几轮比赛
 	void notifyFinish(); // 通知他游戏结束了
+	map<string, int> getScore();
 };
 
 #endif

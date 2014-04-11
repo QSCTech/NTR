@@ -1,8 +1,15 @@
 #include "platform.h"
 #include <iostream>
+#include <numeric>
 
 #include "naive.h"
+<<<<<<< HEAD
 #include "NTRAI_Leo.h"
+=======
+#include "april.h"
+#include "trevor.h"
+#include "senorsen.h"
+>>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
 using namespace std;
 
 Platform::Platform() {
@@ -20,6 +27,20 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
+<<<<<<< HEAD
+=======
+	p = new Trevor(level);
+	name = p->yourName();
+	players.insert(pair <string, Player*> (name, p));
+	scoreCards.insert(pair <string, vector<int>> (name, t));
+
+	p = new Senorsen(level);
+	name = p->yourName();
+	players.insert(pair <string, Player*> (name, p));
+	scoreCards.insert(pair <string, vector<int>> (name, t));
+
+
+>>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);
 	}
@@ -55,12 +76,12 @@ void Platform::initLevels() {
 		level.insert(pair <int, int>(i, 1));
 	}
 	// for (auto iter = level.begin(); iter != level.end(); ++iter) {
-	// 	cout << iter->first << ' ' << iter->second<<endl;
+	// 	cerr << iter->first << ' ' << iter->second<<endl;
 	// }
 }
 
 void Platform::initCards() {
-	cout << "Initialing Cards\n";
+	cerr << "Initialing Cards\n";
 	for (int i = 1; i <= MAX_CARD; ++i) 
 		cards.push_back(i);
 	random_shuffle(cards.begin(), cards.end());
@@ -87,14 +108,14 @@ void Platform::initCards() {
 		heapCards.push_back(heap);
 		++iter;
 	}
-	cout << "Initial Card complete\n";
+	cerr << "Initial Card complete\n";
 	
 }
 
 void Platform::printVector(vector<int> vec) {
 	for (auto ai = vec.begin(); ai != vec.end(); ++ai) 
-		cout << *ai << ' ';
-	cout << endl;
+		cerr << *ai << ' ';
+	cerr << endl;
 }
 
 void Platform::singleRound() {
@@ -102,16 +123,16 @@ void Platform::singleRound() {
 	map<string, int> operationReversed;
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
-		cout << "\tUser " << iter->first << " Start." << endl;
-		int retCard = iter->second->run(heapCards, scoreCards);
 
+		cerr << "\tUser " << iter->first << " Start." << endl;
+		int retCard = iter->second->run(heapCards, scoreCards);
 
 
 		vector<int> &tempUserCard = userCards[iter->first];
 		// 判断是否存在这张牌
 		if (find(tempUserCard.begin(), tempUserCard.end(), retCard) == tempUserCard.end()) {
 			cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
-			cout << "Heap top dumped:" << endl;
+			cerr << "Heap top dumped:" << endl;
 			for (auto heapIter = heapCards.begin(); heapIter != heapCards.end(); ++heapIter) {
 				printVector(*heapIter);
 			}
@@ -186,13 +207,24 @@ void Platform::init() {
 }
 
 void Platform::notifyFinish() {
-	cout << endl << endl << "User Score List:" << endl;
+	cerr << endl << endl << "User Score List:" << endl;
 	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
-		int sum = 0;
-		for (auto io = iter->second.begin(); io != iter->second.end(); ++io) {
-			sum += level[*io];
-		}
-		cout << iter->first << '\t' << sum << endl;
+		int sum = accumulate(iter->second.begin(), iter->second.end(), 0);
+		cerr << iter->first << '\t' << sum << endl;
 	}
+	cerr << endl;
+}
+
+map<string, int> Platform::getScore() {
+	map <string, int> scoreMap;
+	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
+		int sum = accumulate(iter->second.begin(), iter->second.end(), 0);
+		scoreMap.insert(pair <string, int> (iter->first, sum));
+	}
+<<<<<<< HEAD
 	cout << endl;
 }
+=======
+	return scoreMap;
+}
+>>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
