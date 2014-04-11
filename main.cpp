@@ -22,14 +22,12 @@ int main() {
 			p.singleRound();
 		}
 		p.notifyFinish();
-		map <string, int> temp = p.getScore();
+		string winner = p.getWinner();
 
-		for (auto iter = temp.begin(); iter != temp.end(); ++iter) {
-			try {
-				data[iter->first] += iter->second;
-			} catch(out_of_range ) {
-				data.insert(*iter);
-			}
+		try {
+			data[winner] += 1;
+		} catch(out_of_range ) {
+			data.insert(pair<string, int> (winner, 1));
 		}
 	}
 

@@ -1,6 +1,7 @@
 #include "platform.h"
 #include <iostream>
 #include <numeric>
+#include <climits>
 
 #include "naive.h"
 #include "NTRAI_Leo.h"
@@ -30,7 +31,7 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
-	p = new Senorsen(level);
+	p = new April(level);
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
@@ -203,17 +204,24 @@ void Platform::init() {
 void Platform::notifyFinish() {
 	cerr << endl << endl << "User Score List:" << endl;
 	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
-		int sum = accumulate(iter->second.begin(), iter->second.end(), 0);
+		int sum = 0;
+		for (auto innerIter = iter->second.begin(); innerIter != iter->second.end(); ++innerIter) {
+			sum += level[*innerIter];
+		}
 		cerr << iter->first << '\t' << sum << endl;
 	}
 	cerr << endl;
 }
 
-map<string, int> Platform::getScore() {
-	map <string, int> scoreMap;
+string Platform::getWinner() {
+	auto maxIter = scoreCards.begin();
+	int max = INT_MAX;
 	for (auto iter = scoreCards.begin(); iter != scoreCards.end(); ++iter) {
-		int sum = accumulate(iter->second.begin(), iter->second.end(), 0);
-		scoreMap.insert(pair <string, int> (iter->first, sum));
+		int sum = 0;
+		for (auto innerIter = iter->second.begin(); innerIter != iter->second.end(); ++innerIter) {
+			sum += level[*innerIter];
+		}
+		if (max > sum) max = sum, maxIter = iter;
 	}
-	return scoreMap;
+	return maxIter->first;
 }
