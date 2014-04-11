@@ -2,8 +2,7 @@
 #include <iostream>
 
 #include "naive.h"
-#include "april.h"
-#include "trevor.h"
+#include "NTRAI_Leo.h"
 using namespace std;
 
 Platform::Platform() {
@@ -16,16 +15,10 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
-	p = new April(level);
+	p = new NTRAI_Leo(level);
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
-
-	p = new Trevor(level);
-	name = p->yourName();
-	players.insert(pair <string, Player*> (name, p));
-	scoreCards.insert(pair <string, vector<int>> (name, t));
-
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);

@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11 -O2 -Wall
 
-objects=main.o naive.o platform.o
+objects=main.o naive.o NTRAI_Leo.o platform.o
 
 all: NTR
 
@@ -16,6 +16,8 @@ main.cpp: player.h platform.h
 platform.cpp: platform.h
 
 naive.cpp: player.h naive.h
+
+NTRAI_Leo.cpp: player.h NTRAI_Leo.h
 
 .PHONY: clean
 clean:
