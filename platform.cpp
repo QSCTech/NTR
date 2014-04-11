@@ -3,14 +3,12 @@
 #include <numeric>
 
 #include "naive.h"
-<<<<<<< HEAD
 #include "NTRAI_Leo.h"
-=======
 #include "april.h"
 #include "trevor.h"
 #include "senorsen.h"
->>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
 using namespace std;
+
 
 Platform::Platform() {
 	//TODO: 初始化各个玩家
@@ -27,8 +25,6 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
-<<<<<<< HEAD
-=======
 	p = new Trevor(level);
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
@@ -39,8 +35,6 @@ Platform::Platform() {
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
-
->>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);
 	}
@@ -221,10 +215,5 @@ map<string, int> Platform::getScore() {
 		int sum = accumulate(iter->second.begin(), iter->second.end(), 0);
 		scoreMap.insert(pair <string, int> (iter->first, sum));
 	}
-<<<<<<< HEAD
-	cout << endl;
-}
-=======
 	return scoreMap;
 }
->>>>>>> ed275f1d7742debf11ce0487c35f0583cbd98db6
