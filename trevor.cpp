@@ -31,16 +31,16 @@ int Trevor::run(vector<vector<int> > heap, map<string, vector<int> > score) {
 			cardFlag[score[playerName[i]][j]] = 0;
 		}
 	}
-	cout << "cardFlag init" << endl;
+	cerr << "cardFlag init" << endl;
 	int index = getTactics(heap);
 	int ret = myCard[index];
-	cout << "getTactics" << endl;
+	cerr << "getTactics" << endl;
 	//for(vector<int>::iterator it=myCard.begin();it!=myCard.end();++it) {
 	//	if(*it == index) {
 	myCard.erase(index + myCard.begin());
 	///	}
 	//}
-	cout << "end run" << endl;
+	cerr << "end run" << endl;
 	return ret;
 }
 
