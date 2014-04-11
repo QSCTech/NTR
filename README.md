@@ -1,5 +1,5 @@
 #Introduction
-NTR是基于经典桌游《谁是牛头<strike>人</strike>王》的多人 AI 博弈游戏。
+NTR是基于经典桌游《谁是牛头 ~~人~~ 王》的多人 AI 博弈游戏。
 
 #How to play NTR
 此游戏总共有104张号码牌由1到104。
