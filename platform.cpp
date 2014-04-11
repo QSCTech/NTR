@@ -3,6 +3,7 @@
 
 #include "naive.h"
 #include "april.h"
+#include "trevor.h"
 using namespace std;
 
 Platform::Platform() {
@@ -16,6 +17,11 @@ Platform::Platform() {
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
 	p = new April(level);
+	name = p->yourName();
+	players.insert(pair <string, Player*> (name, p));
+	scoreCards.insert(pair <string, vector<int>> (name, t));
+
+	p = new Trevor(level);
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));

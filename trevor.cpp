@@ -31,16 +31,16 @@ int Trevor::run(vector<vector<int> > heap, map<string, vector<int> > score) {
 			cardFlag[score[playerName[i]][j]] = 0;
 		}
 	}
-	// cout << "cardFlag init" << endl;
+	cout << "cardFlag init" << endl;
 	int index = getTactics(heap);
 	int ret = myCard[index];
-	// cout << "getTactics" << endl;
-	for(vector<int>::iterator it=myCard.begin();it!=myCard.end();++it) {
-		if(*it == index) {
-			it=myCard.erase(it);
-		}
-	}
-	// cout << "end run" << endl;
+	cout << "getTactics" << endl;
+	//for(vector<int>::iterator it=myCard.begin();it!=myCard.end();++it) {
+	//	if(*it == index) {
+	myCard.erase(index + myCard.begin());
+	///	}
+	//}
+	cout << "end run" << endl;
 	return ret;
 }
 
@@ -87,8 +87,8 @@ int Trevor::getTactics(vector<vector<int> > heap){
 	}
 	int minScore = getMinScore(heap);
 	if (minDistence < 0) {
-		if (minScore < 5) return myCard[0];
-		else return myCard[myCard.size() - 1];
+		if (minScore < 5) return 0;
+		else return myCard.size() - 1;
 	}
 	while(blackList.size() < myCard.size() && getIndex(blackList, index)) {
 		index = rand() % myCard.size();
