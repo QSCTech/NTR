@@ -51,7 +51,7 @@ int Naive::run(vector<vector<int> > heap, map<string, vector<int> > score) {
 }
 
 int Naive::getHeap(vector<vector<int> > heap, map<string, int> play) {
-	int minimum = INT_MAX, ret;
+	int minimum = INT_MAX, ret = -1;
 	for (size_t i = 0; i != heap.size(); i++) {
 		int total = 0;
 		for (size_t j = 0; j != heap[i].size(); j++) {

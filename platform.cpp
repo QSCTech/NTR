@@ -131,7 +131,7 @@ void Platform::singleRound() {
 		vector<int> &tempUserCard = userCards[iter->first];
 		// 判断是否存在这张牌
 		if (find(tempUserCard.begin(), tempUserCard.end(), retCard) == tempUserCard.end()) {
-			cerr << "User: " + iter->first + " returns error AT run:" << retCard << endl;
+			cerr << "User: " << iter->first << " returns error AT run:" << retCard << endl;
 			cerr << "Heap top dumped:" << endl;
 			for (auto heapIter = heapCards.begin(); heapIter != heapCards.end(); ++heapIter) {
 				printVector(*heapIter);
@@ -166,7 +166,7 @@ void Platform::singleRound() {
 			//没有找到，需要询问他删除那个牌堆了
 			int heapToGet = player->getHeap(heapCards, operationReversed);
 			if (heapToGet < 0 || heapToGet > 3) {
-				cerr << "User: " + iter->first << " returns error AT getHeap: " << heapToGet <<endl;
+				cerr << "User: " << iter->first << " returns error AT getHeap: " << heapToGet <<endl;
 				exit(1);
 			}
 

@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-std=c++11 -O2 -Wall
 
-objects=main.o naive.o NTRAI_Leo.o platform.o
+objects=main.o naive.o NTRAI_Leo.o platform.o april.o trevor.o
 
 all: NTR
 
