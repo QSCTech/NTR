@@ -11,7 +11,6 @@ using namespace std;
 class Richard: public Player {
 	public:
 		Naive(map<int, int>);
-		Naive(map<int, int>, string);
 		string yourName();
 		void init(vector<string>, vector<int>, vector<int>);
 		int run(vector<vector<int> >, map<string, vector<int> >);
@@ -19,14 +18,13 @@ class Richard: public Player {
 		void notifyGetScore(vector<int>);
 		void notifyPostRun(map<string, int>);
 	private:
-		int round;			// current round
-		int myScore;			// my current score
-		int myPosition;			// my position(index) in the player vector
-		vector<string> playerName;	// the names of all players (useless?)
-		vector<int> myCard;		// cards currently in my hand
-		vector<int> unusedCard;		// unsed cards in this game
-		map<int, int> cardDefine;	// card number -- NTR
-		string myName;
+		map<int, int> levelMap;
+
+		vector<int> myCardVec; // 我手中的卡片
+		vector<string> userVec; // 所有用户名字
+		vector<int> extraCardVec; // 多余的卡片（无用的）
+
+
 };
 
 #endif

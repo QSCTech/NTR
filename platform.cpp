@@ -44,6 +44,11 @@ Platform::Platform() {
 	init();
 }
 
+Platform::~Platform() {
+	for (auto iter = players.begin(); iter != players.end(); ++iter) 
+		delete iter->second;
+}
+
 int Platform::getRoundTime() {
 	return (MAX_CARD - extraCards.size() - 4) / players.size();
 }

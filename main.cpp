@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-#define ROUND 10000
+#define ROUND 1
 
 int main() {
 	unsigned seed = chrono::system_clock::now().time_since_epoch().count();

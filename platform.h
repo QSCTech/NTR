@@ -14,7 +14,7 @@ using namespace std;
 class Platform {
 private:
 	map<int, int> level;
-	const int player_count = 4;
+	const int player_count = 2;
 	map<string, Player*> players;
 	vector<string> names;
 	vector<int> cards; //所有的卡片
@@ -25,6 +25,7 @@ private:
 
 public:
 	Platform();
+	~Platform();
 	// 初始化各个牌的分数
 	void initLevels();
 	void initCards();
