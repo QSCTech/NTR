@@ -8,6 +8,7 @@
 #include "april.h"
 #include "trevor.h"
 #include "senorsen.h"
+#include "richard.h"
 using namespace std;
 
 
@@ -25,6 +26,11 @@ Platform::Platform() {
 	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
+
+	p = new Richard(level);
+	name = p->yourName();
+	players.insert(pair <string, Player*>(name, p));
+	scoreCards.insert(pair <string, vector<int>>(name, t));
 
 	for (auto iter = players.begin(); iter != players.end(); ++iter) {
 		names.push_back(iter->first);
