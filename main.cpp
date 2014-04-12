@@ -4,6 +4,7 @@
 #include <random>
 #include <chrono>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 #define ROUND 1
@@ -35,6 +36,6 @@ int main() {
 	for (auto iter = data.begin(); iter != data.end(); ++iter) {
 		cout << iter->first << '\t' << iter->second << endl;
 	}
-	
+	system("pause.");
 	return 0;
 }

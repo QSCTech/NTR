@@ -16,18 +16,8 @@ Platform::Platform() {
 	initLevels();
 
 	vector<int> t;
-	Player *p = new Naive(level);
+	Player *p = new Trevor(level);
 	string name = p->yourName();
-	players.insert(pair <string, Player*> (name, p));
-	scoreCards.insert(pair <string, vector<int>> (name, t));
-
-	p = new NTRAI_Leo(level);
-	name = p->yourName();
-	players.insert(pair <string, Player*> (name, p));
-	scoreCards.insert(pair <string, vector<int>> (name, t));
-
-	p = new Trevor(level);
-	name = p->yourName();
 	players.insert(pair <string, Player*> (name, p));
 	scoreCards.insert(pair <string, vector<int>> (name, t));
 
