@@ -20,7 +20,7 @@ class Trevor: public Player {
 		vector<string> playerName;
 		vector<int> myCard, leftCard;
 		map<int, int> cardDefine;
-		int cardFlag[105] = {1};
+		int cardFlag[105];
 		int getTactics(vector<vector<int>>);
 		int getIndex(vector<int> a, int value);
 		int getMinScore(vector<vector<int> > heap);

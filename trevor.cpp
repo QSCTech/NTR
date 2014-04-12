@@ -5,6 +5,8 @@
 
 Trevor::Trevor(map<int, int> card_define) {
 	cardDefine = card_define;
+	memset(cardFlag, 0, sizeof(cardFlag));
+	cardFlag[0] = 1;
 }
 
 string Trevor::yourName() {
