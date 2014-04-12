@@ -10,11 +10,11 @@ using namespace std;
 
 class Richard: public Player {
 	public:
-		Naive(map<int, int>);
+		Richard(map<int, int>);
 		string yourName();
 		void init(vector<string>, vector<int>, vector<int>);
 		int run(vector<vector<int> >, map<string, vector<int> >);
-		int getHeap(vector<vector<int> >, map<string, int>);
+		int getHeap(vector<vector<int>>, map<string, int>);
 		void notifyGetScore(vector<int>);
 		void notifyPostRun(map<string, int>);
 	private:

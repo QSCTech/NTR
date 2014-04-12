@@ -16,12 +16,13 @@ void Richard::init(vector<string> userName, vector<int> cards, vector<int> extra
 	this->extraCardVec = extras;
 }
 
-void Richard::run(vector<vector<int>> heapVec, map<string, vector<int>> scoreMap) {
-
+int Richard::run(vector<vector<int>> heapVec, map<string, vector<int> > scoreMap) {
+	return 0;
 }
 
-void Richard::getHeap(vector<vector<int>> heapVec, map<string, int> userHand) {
-	
+int Richard::getHeap(vector<vector<int>> heapVec, map<string, int> userHand) {
+	vector<int> heapSumVec;
+	return 0;
 };
 
 void Richard::notifyGetScore(vector<int> getScoreVec) {
